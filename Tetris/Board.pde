@@ -1,8 +1,7 @@
 public class Board{
   private Patch[] gameBoard;
   
-  public Board(){
-    
+  public Board(){  
     Patch[][] gameBoard = new Patch[16][8];
   }
   
