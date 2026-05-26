@@ -1,29 +1,91 @@
 public class Board{
-  private Patch[] gameBoard;
+  private Patch[][] grid;
+  private int cols;
+  private int rows;
+  private int cellSize;
   
   public Board(){  
     Patch[][] gameBoard = new Patch[16][8];
   }
   
-  public Board(int xVal, int yVal){
-    Patch[][] gameBoard = new Patch[yVal][xVal];
+  public Board(int xVal, int yVal, int s){
+    cols = xVal;
+    rows = yVal;
+    cellSize = s;
+    grid = new Patch[rows][cols];
+    
+    for(int i = 0; i < rows; i++){
+      for(int j = 0; j < cols; j++){
+        grid[i][j] = new Patch();
+      }
+    }
   }
   
-  public void spawnBlock(){
-    double ran = 7 * Math.random();
-    if(ran < 1){
+  public void display(){
+    for(int i = 0; i < rows; i++){
+      for(int j = 0; j < cols; j++){
+        grid[i][j].display(j * cellSize,i * cellSize, cellSize);
+      }
     }
-    else if(ran < 2){
+  }
+  
+  boolean canMove(Block b, int dx, int dy){
+    for(int r = 0; r < b.shape.length; r++){
+      for(int c = 0; c < b.shape[r].length; c++){
+        if (b.shape[r][c] == 1){
+          int newX = b.x + c + dx;
+          int newY = b.y + r + dy;
+          
+          if(newX < 0|| newX >=cols || newY >= rows){
+            return false;
+          }
+          
+          if(newY >= 0 && grid[newY][newX].filled){
+            return false;
+          }
+        }
+      }
     }
-    else if(ran < 3){
+    
+    return true;
+  }
+  
+  boolean validPosition(Block b){
+    return canMove(b, 0, 0);
+  }
+  
+  void placeBlock(Block b) { 
+    for(int r = 0; r < b.shape.length; r++){
+      for(int c = 0; c < b.shape[r].length; r++){
+        if(b.shape[r][c] == 1){
+          int boardX = b.x + c;
+          int boardY = b.y + r;
+          
+          grid[boardY][boardX].set(b.c);
+        }
+      }
     }
-    else if(ran < 4){
-    }
-    else if(ran < 5){
-    }
-    else if(ran < 6){
-    }
-    else if(ran < 7){
+  }
+  
+  public void clearLines() {
+    for(int y = rows - 1; y >= 0; y--){
+      boolean full = true;
+      
+      for(int x = 0; x < cols; x++){
+        if(!grid[y][x].filled){
+          full = false;
+        }
+      }
+      
+      if(full){
+        for(int row = y; row > 0; row--){
+          for(int col = 0; col < cols; col++){
+            grid[row][col].filled = grid[row - 1][col].getFilled();
+            grid[row][col].c = grid[row - 1][col].getC();
+          }
+        }
+        y++;
+      }
     }
   }
 }
