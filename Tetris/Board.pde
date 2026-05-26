@@ -29,7 +29,7 @@ public class Board{
     }
   }
   
-  boolean canMove(Block b, int dx, int dy){
+  public boolean canMove(Block b, int dx, int dy){
     for(int r = 0; r < b.shape.length; r++){
       for(int c = 0; c < b.shape[r].length; c++){
         if (b.shape[r][c] == 1){
@@ -50,13 +50,13 @@ public class Board{
     return true;
   }
   
-  boolean validPosition(Block b){
+  public boolean validPosition(Block b){
     return canMove(b, 0, 0);
   }
   
-  void placeBlock(Block b) { 
+  public void placeBlock(Block b) { 
     for(int r = 0; r < b.shape.length; r++){
-      for(int c = 0; c < b.shape[r].length; r++){
+      for(int c = 0; c < b.shape[r].length; c++){
         if(b.shape[r][c] == 1){
           int boardX = b.x + c;
           int boardY = b.y + r;

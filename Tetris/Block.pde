@@ -110,3 +110,25 @@ class Block {
     );
   }
 }
+
+/*
+public class Block{
+  private int[][] shape;
+  private int x; 
+  private int u;
+  private color c;
+  private int cellSize = 40;
+  private int[][] previousShape;
+  
+  public Block(int[][] s, color col){
+    shape = s;
+    c = col;
+    x = 3;
+    y = 0;
+  }
+  
+  public void display(){
+    fill(c);
+    stroke(255);
+    for(int r = 0; r < 
+*/
