@@ -62,6 +62,7 @@ public class Board{
           int boardY = b.y + r;
           
           grid[boardY][boardX].set(b.c);
+          //Problem here(?)
         }
       }
     }
