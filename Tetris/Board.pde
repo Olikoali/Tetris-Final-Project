@@ -5,7 +5,7 @@ public class Board{
   private int cellSize;
   
   public Board(){  
-    Patch[][] gameBoard = new Patch[16][8];
+    grid = new Patch[16][8];
   }
   
   public Board(int xVal, int yVal, int s){
@@ -72,7 +72,7 @@ public class Board{
       boolean full = true;
       
       for(int x = 0; x < cols; x++){
-        if(!grid[y][x].filled){
+        if(!grid[y][x].getFilled()){
           full = false;
         }
       }
@@ -80,8 +80,8 @@ public class Board{
       if(full){
         for(int row = y; row > 0; row--){
           for(int col = 0; col < cols; col++){
-            grid[row][col].filled = grid[row - 1][col].getFilled();
-            grid[row][col].c = grid[row - 1][col].getC();
+            grid[row][col].setFilled(grid[row - 1][col].getFilled());
+            grid[row][col].setC(grid[row - 1][col].getC());
           }
         }
         y++;
