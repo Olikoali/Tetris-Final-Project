@@ -58,10 +58,9 @@ public class Board{
     for(int r = 0; r < b.shape.length; r++){
       for(int c = 0; c < b.shape[r].length; c++){
         if(b.shape[r][c] == 1){
-          int boardX = b.x + c;
-          int boardY = b.y + r;
-          
-          grid[boardY][boardX].set(b.c);
+          int boardX = b.getX() + c;
+          int boardY = b.getY() + r;
+          grid[boardY][boardX].setr(b.c);
           //Problem here(?)
         }
       }
@@ -77,13 +76,28 @@ public class Board{
           full = false;
         }
       }
-      
+
+
+for(int x = 0; x < cols; x++){
+  if(grid[y][x].getFilled()){
+    print("X");
+  } else {
+    print(".");
+  }
+}
+println();
+
+
       if(full){
+        System.out.print("1"); //This is never called
         for(int row = y; row > 0; row--){
           for(int col = 0; col < cols; col++){
             grid[row][col].setFilled(grid[row - 1][col].getFilled());
             grid[row][col].setC(grid[row - 1][col].getC());
           }
+        }
+        for(int col = 0; col < cols; col++){
+          grid[0][col].clearr();
         }
         y++;
       }

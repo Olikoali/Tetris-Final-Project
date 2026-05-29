@@ -6,7 +6,7 @@ int timer = 0;
 int dropSpeed = 30;
 void setup(){
   size(400, 800);
-  board = new Board(20, 10, 40);
+  board = new Board(10, 18, 40);
   //leaderBoard = new Leaderboard();
   spawnBlock();
 }

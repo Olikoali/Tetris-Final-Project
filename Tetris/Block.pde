@@ -109,6 +109,14 @@ class Block {
       color(200,0,255)
     );
   }
+  
+    public int getX(){
+    return x;
+  }
+  
+  public int getY(){
+    return y;
+  }
 }
 
 /*
@@ -120,6 +128,9 @@ public class Block{
   private int cellSize = 40;
   private int[][] previousShape;
   
+  */
+
+  /*
   public Block(int[][] s, color col){
     shape = s;
     c = col;
