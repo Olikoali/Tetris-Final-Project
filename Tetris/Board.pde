@@ -61,35 +61,26 @@ public class Board{
           int boardX = b.getX() + c;
           int boardY = b.getY() + r;
           grid[boardY][boardX].setr(b.c);
-          //Problem here(?)
         }
       }
     }
   }
   
-  public void clearLines() {
+  public int clearLines() {
+    int linesCleared = 0; 
+    
     for(int y = rows - 1; y >= 0; y--){
       boolean full = true;
       
       for(int x = 0; x < cols; x++){
         if(!grid[y][x].getFilled()){
           full = false;
+          break;
         }
       }
 
-
-for(int x = 0; x < cols; x++){
-  if(grid[y][x].getFilled()){
-    print("X");
-  } else {
-    print(".");
-  }
-}
-println();
-
-
       if(full){
-        System.out.print("1"); //This is never called
+        linesCleared++;
         for(int row = y; row > 0; row--){
           for(int col = 0; col < cols; col++){
             grid[row][col].setFilled(grid[row - 1][col].getFilled());
@@ -102,5 +93,6 @@ println();
         y++;
       }
     }
+    return linesCleared;
   }
 }
